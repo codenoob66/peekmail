@@ -17,18 +17,20 @@ jobs:
           fetch-depth: 0
 
       - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          server: ssh.ca903dsng.service.one
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          server: ssh.ca903dsng.service.one
           port: 22
-          server-dir: /webroots/55e0a18c/
+          local_path: './'
+          remote_path: '/webroots/55e0a18c/'
+          sftp_args: '-o ConnectTimeout=5'
           exclude: |
-            **/.git*
-            **/.git*/**
-            .github/**
+            .git*
+            .github
             credentials.json
             token.json
             users.db
             README.md
+            vendor
