@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Rich Purple Gradient Background */
+    background: linear-gradient(135deg, #8E2DE2 0%, #5c1ed7 100%);
+}
+
+.main-title {
+    letter-spacing: 0.1rem;
+    font-size: 1.6rem;
+    color: #333;
+    text-align: center;
+}
+
+.form-container {
+    padding: 40px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.form-container > * {
+    padding-bottom: 1.5rem;
+}
+
+.login-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    padding-bottom: 2rem;
+}
+
+.input-container > input {
+    border: none;
+    border-bottom: 2px solid #ddd;
+    padding: 10px 5px;
+    font-size: 1rem;
+    transition: border-bottom-color 0.3s;
+    outline: none;
+    color: #333;
+    background-color: transparent;
+}
+
+.input-container > input:focus {
+    border-bottom: 2px solid #8E2DE2; /* Matches the purple theme */
+}
+
+.btn-container {
+    padding-bottom: 1.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Updated Login Button based on your preferences */
+.login-btn {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 12px 20px; /* Adjusted padding slightly for a better modern look */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer/hand icon */
+    font-size: 16px; /* Larger font size */
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.1s; /* Smooth transition */
+    width: 100%; /* Makes the button fill the container */
+}
+
+.login-btn:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.login-btn:active {
+    transform: scale(0.98); /* Gentle click effect */
+}
+
+.divider {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0 !important;
+}
+
+.g_id_signin {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
