@@ -3,6 +3,7 @@
         "friendsofphp/php-cs-fixer": "^3.94"
     },
     "require": {
-        "google/apiclient": "^2.19"
+        "google/apiclient": "^2.19",
+        "vlucas/phpdotenv": "^5.6"
     }
 }

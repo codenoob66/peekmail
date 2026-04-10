@@ -1,3 +1,10 @@
+<?php
+require_once __DIR__ . '/vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->safeLoad();
+
+$google_client_id = $_ENV['GOOGLE_CLIENT_ID'] ?? '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +12,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Peek Mail</title>
+    <script>
+        const GOOGLE_CLIENT_ID = "<?php echo $google_client_id; ?>";
+    </script>
 </head>
 <body>
     <div class="form-container">

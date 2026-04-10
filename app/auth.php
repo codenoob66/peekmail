@@ -17,8 +17,12 @@ if (empty($code)) {
 }
 
 try {
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+    $dotenv->safeLoad();
+
     $client = new Google\Client();
-    $client->setAuthConfig(__DIR__ . '/../credentials.json');
+    $client->setClientId($_ENV['GOOGLE_CLIENT_ID']);
+    $client->setClientSecret($_ENV['GOOGLE_CLIENT_SECRET']);
     $client->setRedirectUri('postmessage');
 
     $token = $client->fetchAccessTokenWithAuthCode($code);

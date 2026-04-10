@@ -2,6 +2,9 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->safeLoad();
+
 session_start();
 
 // Ensure user is logged in
@@ -13,17 +16,15 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 // Database connection
-$db = new PDO('sqlite:' . __DIR__ . '/users.db');
+$db_path = $_ENV['DB_PATH'] ?? 'users.db';
+$db = new PDO('sqlite:' . __DIR__ . '/' . $db_path);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $client = new Google\Client();
-$client->setAuthConfig(__DIR__ . '/credentials.json');
+$client->setClientId($_ENV['GOOGLE_CLIENT_ID']);
+$client->setClientSecret($_ENV['GOOGLE_CLIENT_SECRET']);
+$client->setRedirectUri($_ENV['GOOGLE_REDIRECT_URI']);
 $client->addScope(Google\Service\Gmail::GMAIL_READONLY);
-$client->setAccessType('offline');
-$client->setPrompt('select_account');
-
-// Set redirect URI directly
-$client->setRedirectUri('https://peekmail.codesbyrafael.com/dashboard.php');
 
 // Fetch user's token from database
 $stmt = $db->prepare("SELECT google_token FROM users WHERE id = ?");

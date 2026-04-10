@@ -2,7 +2,7 @@ let client;
 
 window.onload = function () {
     client = google.accounts.oauth2.initCodeClient({
-        client_id: '951139635404-1lg99r1qorsu66hu0lkr8ht767pbbihv.apps.googleusercontent.com',
+        client_id: GOOGLE_CLIENT_ID,
         scope: 'https://www.googleapis.com/auth/gmail.readonly profile email',
         ux_mode: 'popup',
         callback: (response) => {

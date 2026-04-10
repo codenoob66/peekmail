@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once __DIR__ . '/../vendor/autoload.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: ../index.php');
@@ -14,7 +15,11 @@ if (empty($username) || empty($password)) {
 }
 
 try {
-    $db = new PDO('sqlite:' . __DIR__ . '/../users.db');
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+    $dotenv->safeLoad();
+    
+    $db_path = $_ENV['DB_PATH'] ?? 'users.db';
+    $db = new PDO('sqlite:' . __DIR__ . '/../' . $db_path);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $stmt = $db->prepare("SELECT * FROM users WHERE username = ?");
