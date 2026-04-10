@@ -24,21 +24,8 @@
             <span class="divider">or sign in with</span>
         </form>
 
-        <div
-        id="g_id_onload"
-        data-auto_prompt="false"
-        data-callback="handleCredentialResponse"
-        data-client_id="951139635404-1lg99r1qorsu66hu0lkr8ht767pbbihv.apps.googleusercontent.com"
-        >
-        </div>
-        <div class="g_id_signin"
-             data-type="standard"
-             data-size="large"
-             data-theme="outline"
-             data-text="sign_in_with"
-             data-shape="rectangular"
-             data-logo_alignment="center"
-             data-width="320">
+        <div class="btn-container" style="margin-top: 10px;">
+            <button id="google-login-btn" type="button" class="login-btn" style="background-color: #4285F4; border-color: #4285F4;">Sign in with Google</button>
         </div>
     </div>
     <script src="https://accounts.google.com/gsi/client" async></script>

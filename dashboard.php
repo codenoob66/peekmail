@@ -38,32 +38,15 @@ if ($googleToken) {
 
 // If there is no previous token or it's expired.
 if ($client->isAccessTokenExpired()) {
-    // Refresh the token if possible, else fetch a new one.
+    // Refresh the token if possible, else prompt to login again.
     if ($client->getRefreshToken()) {
         $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
         // Save the updated token to database
         $stmt = $db->prepare("UPDATE users SET google_token = ? WHERE id = ?");
         $stmt->execute([json_encode($client->getAccessToken()), $user_id]);
-    } elseif (isset($_GET['code'])) {
-        $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
-        $client->setAccessToken($token);
-
-        if (array_key_exists('error', $token)) {
-            throw new Exception(join(', ', $token));
-        }
-
-        // Save the token to database
-        $stmt = $db->prepare("UPDATE users SET google_token = ? WHERE id = ?");
-        $stmt->execute([json_encode($client->getAccessToken()), $user_id]);
-
-        // Redirect back to clear the code from the URL
-        header('Location: dasboard.php');
-        exit;
     } else {
-        $authUrl = $client->createAuthUrl();
         echo "<h1>Welcome, " . htmlspecialchars($_SESSION['username'] ?? $_SESSION['name'] ?? 'User') . "!</h1>";
-        printf('<p>To view your emails, you need to authorize Gmail:</p>');
-        printf('<a href="%s"><button>Authorize Gmail</button></a>', $authUrl);
+        echo "<p>Your session has expired or Gmail access is missing. Please log out and sign in with Google again to restore access.</p>";
         echo '<br><br><a href="logout.php"><button>Logout</button></a>';
         exit;
     }
