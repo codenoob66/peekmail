@@ -16,11 +16,11 @@ if (empty($code)) {
     exit;
 }
 
-$client = new Google\Client();
-$client->setAuthConfig(__DIR__ . '/../credentials.json');
-$client->setRedirectUri('postmessage');
-
 try {
+    $client = new Google\Client();
+    $client->setAuthConfig(__DIR__ . '/../credentials.json');
+    $client->setRedirectUri('postmessage');
+
     $token = $client->fetchAccessTokenWithAuthCode($code);
 
     if (array_key_exists('error', $token)) {
@@ -99,13 +99,6 @@ try {
         }
 
         echo json_encode(['redirect' => 'dashboard.php']);
-    } else {
-        echo json_encode(['error' => 'Invalid ID token']);
-    }
-} catch (Exception $e) {
-    echo json_encode(['error' => 'Authentication error: ' . $e->getMessage()]);
-}
-ard.php']);
     } else {
         echo json_encode(['error' => 'Invalid ID token']);
     }
